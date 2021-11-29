@@ -12,21 +12,12 @@ namespace BuildersApp_Novikov_3ISP11_13.Helper
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class sysdiagrams
     {
-        public int IdOrder { get; set; }
-        public Nullable<int> IdClient { get; set; }
-        public Nullable<int> IdComponent { get; set; }
-        public Nullable<int> IdService { get; set; }
-        public Nullable<int> IdPayment { get; set; }
-        public Nullable<int> IdSupplier { get; set; }
-        public System.DateTime CreateDate { get; set; }
-        public System.DateTime DateOfSupply { get; set; }
-    
-        public virtual Client Client { get; set; }
-        public virtual Component Component { get; set; }
-        public virtual Payment Payment { get; set; }
-        public virtual Service Service { get; set; }
-        public virtual Supplier Supplier { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

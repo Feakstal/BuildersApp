@@ -12,25 +12,21 @@ namespace BuildersApp_Novikov_3ISP11_13.Helper
     using System;
     using System.Collections.Generic;
     
-    public partial class Supplier
+    public partial class OrderStatus
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Supplier()
+        public OrderStatus()
         {
-            this.Order = new HashSet<Order>();
-            this.Supplier1 = new HashSet<Supplier>();
+            this.OrderComponent = new HashSet<OrderComponent>();
+            this.OrderService = new HashSet<OrderService>();
         }
     
-        public int IdSupplier { get; set; }
-        public string SupplierName { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public Nullable<int> IdSupplierType { get; set; }
-        public string Description { get; set; }
+        public int IdOrderStatus { get; set; }
+        public string OrderStatusName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<OrderComponent> OrderComponent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supplier> Supplier1 { get; set; }
-        public virtual Supplier Supplier2 { get; set; }
+        public virtual ICollection<OrderService> OrderService { get; set; }
     }
 }

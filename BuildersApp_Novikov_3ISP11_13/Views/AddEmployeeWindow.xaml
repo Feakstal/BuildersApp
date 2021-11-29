@@ -1,0 +1,62 @@
+﻿<Window x:Class="BuildersApp_Novikov_3ISP11_13.Views.AddEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BuildersApp_Novikov_3ISP11_13.Views"
+        mc:Ignorable="d"
+         x:Name="winAddEmployee" Height="550" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Icon="/Resources/MainLogo.png">
+    <Border CornerRadius="10 10 0 0" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Border Background="#FF248ECB" CornerRadius="10 10 0 0" MouseDown="Drag"/>
+                <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">
+                    <Image Source="/Resources/BorderLogo.png" Width="20" Height="20"/>
+                    <TextBlock Style="{StaticResource tblockMain}" Text="Добавление сотрудника" Margin="10 0 0 0" Foreground="White"/>
+                </WrapPanel>
+                <WrapPanel  HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button x:Name="btnClose" Style="{StaticResource btnUpperBar}" Content="X" Margin="5" Click="btnClose_Click"/>
+                </WrapPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Фамилия:" Style="{StaticResource tblockMain}"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Имя:" Style="{StaticResource tblockMain}"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Отчество:" Style="{StaticResource tblockMain}"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Пол:" Style="{StaticResource tblockMain}"/>
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="Дата рождения:" Style="{StaticResource tblockMain}"/>
+                <TextBlock Grid.Column="2" Grid.Row="2" Text="Номер телефон:" Style="{StaticResource tblockMain}"/>
+                <TextBlock Grid.Column="2" Grid.Row="3" Text="Электронная почта:" Style="{StaticResource tblockMain}"/>
+                <TextBlock Grid.Column="2" Grid.Row="1" Text="Адрес:" Style="{StaticResource tblockMain}"/>
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Должность:" Style="{StaticResource tblockMain}"/>
+                <TextBox Grid.Column="1" Grid.Row="0" x:Name="tboxLastName" Style="{StaticResource tboxDefault}" Width="170" PreviewTextInput="tboxLastName_PreviewTextInput"/>
+                <TextBox Grid.Column="1" Grid.Row="1" x:Name="tboxFirstName" Style="{StaticResource tboxDefault}" Width="170" PreviewTextInput="tboxFirstName_PreviewTextInput"/>
+                <TextBox Grid.Column="1" Grid.Row="2" x:Name="tboxFatherName" Style="{StaticResource tboxDefault}" Width="170" PreviewTextInput="tboxFatherName_PreviewTextInput"/>
+                <ComboBox Grid.Column="1" Grid.Row="3" x:Name="cboxGender" Width="170" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Franklin Gothic Book"/>
+                <DatePicker Grid.Column="3" Grid.Row="0" x:Name="dpBirthday" Width="170" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Franklin Gothic Book"/>
+                <TextBox Grid.Column="3" Grid.Row="2" x:Name="tboxPhone" Style="{StaticResource tboxDefault}" Width="170" PreviewTextInput="tboxPhone_PreviewTextInput"/>
+                <TextBox Grid.Column="3" Grid.Row="3" x:Name="tboxEmail" Style="{StaticResource tboxDefault}" Width="170"/>
+                <TextBox Grid.Column="3" Grid.Row="1" x:Name="tboxAddress" Style="{StaticResource tboxDefault}" Width="170" PreviewTextInput="tboxAddress_PreviewTextInput"/>
+                <ComboBox Grid.Column="1" Grid.Row="4" x:Name="cboxPost" Width="170" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Franklin Gothic Book"/>
+            </Grid>
+            <Button Grid.Row="2" x:Name="btnSave" Style="{StaticResource btnDefault}" Content="Сохранить" Click="btnSave_Click"/>
+        </Grid>
+    </Border>
+</Window>

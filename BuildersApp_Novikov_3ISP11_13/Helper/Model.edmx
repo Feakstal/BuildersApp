@@ -13,12 +13,12 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="75" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="75" Nullable="false" />
           <Property Name="FatherName" Type="nvarchar" MaxLength="75" />
-          <Property Name="IdGender" Type="int" />
+          <Property Name="IdGender" Type="int" Nullable="false" />
           <Property Name="DateOfBirth" Type="date" Nullable="false" />
-          <Property Name="Phone" Type="nchar" MaxLength="12" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="11" />
           <Property Name="Email" Type="nvarchar" MaxLength="45" />
           <Property Name="Address" Type="nvarchar" MaxLength="125" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IdDeleted" Type="int" />
         </EntityType>
         <EntityType Name="Component">
           <Key>
@@ -27,6 +27,15 @@
           <Property Name="IdComponent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ComponentName" Type="nvarchar" MaxLength="155" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IdDeleted" Type="int" />
+        </EntityType>
+        <EntityType Name="Deleted">
+          <Key>
+            <PropertyRef Name="IdDeleted" />
+          </Key>
+          <Property Name="IdDeleted" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeletedName" Type="nvarchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -37,14 +46,12 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="75" Nullable="false" />
           <Property Name="FatherName" Type="nvarchar" MaxLength="75" />
           <Property Name="IdGender" Type="int" Nullable="false" />
-          <Property Name="DateOfBith" Type="date" Nullable="false" />
-          <Property Name="DateOfEmployment" Type="date" Nullable="false" />
-          <Property Name="DateOfDismissal" Type="date" />
-          <Property Name="Phone" Type="nchar" MaxLength="12" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="11" />
           <Property Name="Email" Type="nvarchar" MaxLength="45" />
           <Property Name="Address" Type="nvarchar" MaxLength="125" Nullable="false" />
           <Property Name="IdPost" Type="int" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IdDeleted" Type="int" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -53,18 +60,44 @@
           <Property Name="IdGender" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GenderName" Type="nvarchar" MaxLength="55" Nullable="false" />
         </EntityType>
-        <EntityType Name="Order">
+        <EntityType Name="OrderComponent">
           <Key>
-            <PropertyRef Name="IdOrder" />
+            <PropertyRef Name="IdOrderComponent" />
           </Key>
-          <Property Name="IdOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdClient" Type="int" />
-          <Property Name="IdComponent" Type="int" />
-          <Property Name="IdService" Type="int" />
-          <Property Name="IdPayment" Type="int" />
-          <Property Name="IdSupplier" Type="int" />
+          <Property Name="IdOrderComponent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdComponent" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="IdPayment" Type="int" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+          <Property Name="IdOrderStatus" Type="int" Nullable="false" />
+          <Property Name="IdSupplierType" Type="int" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
-          <Property Name="DateOfSupply" Type="datetime" Nullable="false" />
+          <Property Name="PerformanceDate" Type="datetime" Nullable="false" />
+          <Property Name="Commentary" Type="nvarchar(max)" />
+          <Property Name="IdDeleted" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderService">
+          <Key>
+            <PropertyRef Name="IdOrderService" />
+          </Key>
+          <Property Name="IdOrderService" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdService" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdPayment" Type="int" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+          <Property Name="IdOrderStatus" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="PerformanceDate" Type="datetime" Nullable="false" />
+          <Property Name="Commentary" Type="nvarchar(max)" />
+          <Property Name="IdDeleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="IdOrderStatus" />
+          </Key>
+          <Property Name="IdOrderStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderStatusName" Type="nvarchar" MaxLength="55" Nullable="false" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -81,6 +114,24 @@
           <Property Name="PostName" Type="nvarchar" MaxLength="75" Nullable="false" />
           <Property Name="Wage" Type="decimal" Precision="12" Scale="2" Nullable="false" />
         </EntityType>
+        <EntityType Name="SellingComponent">
+          <Key>
+            <PropertyRef Name="IdSellingComponent" />
+          </Key>
+          <Property Name="IdSellingComponent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdComponent" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="SalesValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SellingService">
+          <Key>
+            <PropertyRef Name="IdSellingService" />
+          </Key>
+          <Property Name="IdSellingService" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdService" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="SalesValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="Service">
           <Key>
             <PropertyRef Name="IdService" />
@@ -88,16 +139,8 @@
           <Property Name="IdService" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ServiceName" Type="nvarchar" MaxLength="145" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Supplier">
-          <Key>
-            <PropertyRef Name="IdSupplier" />
-          </Key>
-          <Property Name="IdSupplier" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SupplierName" Type="nvarchar" MaxLength="65" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="12" Scale="2" />
-          <Property Name="IdSupplierType" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IdDeleted" Type="int" />
         </EntityType>
         <EntityType Name="SupplierType">
           <Key>
@@ -105,6 +148,17 @@
           </Key>
           <Property Name="IdSupplierType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SupplierTypeName" Type="nvarchar" MaxLength="65" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -116,7 +170,7 @@
           <Property Name="Password" Type="nvarchar" MaxLength="75" Nullable="false" />
         </EntityType>
         <Association Name="FK__Client__IdGender__38996AB5">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -152,78 +206,222 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__IdClient__4E88ABD4">
-          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
               <PropertyRef Name="IdClient" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderComponent">
               <PropertyRef Name="IdClient" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__IdCompone__4F7CD00D">
-          <End Role="Component" Type="Self.Component" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Component" Type="Self.Component" Multiplicity="1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Component">
               <PropertyRef Name="IdComponent" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderComponent">
               <PropertyRef Name="IdComponent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__IdPayment__5165187F">
-          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Payment">
               <PropertyRef Name="IdPayment" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderComponent">
               <PropertyRef Name="IdPayment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__IdService__5070F446">
-          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+        <Association Name="FK__OrdersSer__IdCli__29AC2CE0">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersSer__IdDel__2D7CBDC4">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersSer__IdEmp__2B947552">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="IdEmployee" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersSer__IdOrd__2C88998B">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="IdOrderStatus" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IdOrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersSer__IdPay__2AA05119">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="IdPayment" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IdPayment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersSer__IdSer__28B808A7">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">
               <PropertyRef Name="IdService" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderService">
               <PropertyRef Name="IdService" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__IdSupplie__52593CB8">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+        <Association Name="FK__SellingCo__IdCom__58D1301D">
+          <End Role="Component" Type="Self.Component" Multiplicity="1" />
+          <End Role="SellingComponent" Type="Self.SellingComponent" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="IdSupplier" />
+            <Principal Role="Component">
+              <PropertyRef Name="IdComponent" />
             </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="IdSupplier" />
+            <Dependent Role="SellingComponent">
+              <PropertyRef Name="IdComponent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Supplier__IdSupp__47DBAE45">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
-          <End Role="Supplier1" Type="Self.Supplier" Multiplicity="*" />
+        <Association Name="FK__SellingSe__IdSer__5BAD9CC8">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="SellingService" Type="Self.SellingService" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="IdSupplier" />
+            <Principal Role="Service">
+              <PropertyRef Name="IdService" />
             </Principal>
-            <Dependent Role="Supplier1">
+            <Dependent Role="SellingService">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_IdDeleted">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Component_IdDeleted">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="0..1" />
+          <End Role="Component" Type="Self.Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_IdDeleted">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_IdDeleted">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="0..1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="OrderComponent">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="IdOrderStatus" />
+            </Principal>
+            <Dependent Role="OrderComponent">
+              <PropertyRef Name="IdOrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_SupplierType">
+          <End Role="SupplierType" Type="Self.SupplierType" Multiplicity="1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierType">
+              <PropertyRef Name="IdSupplierType" />
+            </Principal>
+            <Dependent Role="OrderComponent">
               <PropertyRef Name="IdSupplierType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__IdPost__3F466844">
+        <Association Name="FK_Service_IdDeleted">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Post">
           <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -238,14 +436,19 @@
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Component" EntityType="Self.Component" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deleted" EntityType="Self.Deleted" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderComponent" EntityType="Self.OrderComponent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderService" EntityType="Self.OrderService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SellingComponent" EntityType="Self.SellingComponent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SellingService" EntityType="Self.SellingService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierType" EntityType="Self.SupplierType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Client__IdGender__38996AB5" Association="Self.FK__Client__IdGender__38996AB5">
             <End Role="Gender" EntitySet="Gender" />
@@ -261,29 +464,77 @@
           </AssociationSet>
           <AssociationSet Name="FK__Order__IdClient__4E88ABD4" Association="Self.FK__Order__IdClient__4E88ABD4">
             <End Role="Client" EntitySet="Client" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
           </AssociationSet>
           <AssociationSet Name="FK__Order__IdCompone__4F7CD00D" Association="Self.FK__Order__IdCompone__4F7CD00D">
             <End Role="Component" EntitySet="Component" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
           </AssociationSet>
           <AssociationSet Name="FK__Order__IdPayment__5165187F" Association="Self.FK__Order__IdPayment__5165187F">
             <End Role="Payment" EntitySet="Payment" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__IdService__5070F446" Association="Self.FK__Order__IdService__5070F446">
+          <AssociationSet Name="FK__OrdersSer__IdCli__29AC2CE0" Association="Self.FK__OrdersSer__IdCli__29AC2CE0">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdDel__2D7CBDC4" Association="Self.FK__OrdersSer__IdDel__2D7CBDC4">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdEmp__2B947552" Association="Self.FK__OrdersSer__IdEmp__2B947552">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdOrd__2C88998B" Association="Self.FK__OrdersSer__IdOrd__2C88998B">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdPay__2AA05119" Association="Self.FK__OrdersSer__IdPay__2AA05119">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdSer__28B808A7" Association="Self.FK__OrdersSer__IdSer__28B808A7">
             <End Role="Service" EntitySet="Service" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderService" EntitySet="OrderService" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__IdSupplie__52593CB8" Association="Self.FK__Order__IdSupplie__52593CB8">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="Order" EntitySet="Order" />
+          <AssociationSet Name="FK__SellingCo__IdCom__58D1301D" Association="Self.FK__SellingCo__IdCom__58D1301D">
+            <End Role="Component" EntitySet="Component" />
+            <End Role="SellingComponent" EntitySet="SellingComponent" />
           </AssociationSet>
-          <AssociationSet Name="FK__Supplier__IdSupp__47DBAE45" Association="Self.FK__Supplier__IdSupp__47DBAE45">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="Supplier1" EntitySet="Supplier" />
+          <AssociationSet Name="FK__SellingSe__IdSer__5BAD9CC8" Association="Self.FK__SellingSe__IdSer__5BAD9CC8">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="SellingService" EntitySet="SellingService" />
           </AssociationSet>
-          <AssociationSet Name="FK__User__IdPost__3F466844" Association="Self.FK__User__IdPost__3F466844">
+          <AssociationSet Name="FK_Client_IdDeleted" Association="Self.FK_Client_IdDeleted">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Component_IdDeleted" Association="Self.FK_Component_IdDeleted">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="Component" EntitySet="Component" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_IdDeleted" Association="Self.FK_Employee_IdDeleted">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_IdDeleted" Association="Self.FK_Order_IdDeleted">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderStatus" Association="Self.FK_Order_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_SupplierType" Association="Self.FK_Order_SupplierType">
+            <End Role="SupplierType" EntitySet="SupplierType" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_IdDeleted" Association="Self.FK_Service_IdDeleted">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Post" Association="Self.FK_User_Post">
             <End Role="Post" EntitySet="Post" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
@@ -301,14 +552,16 @@
           <Property Name="LastName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FatherName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
-          <Property Name="IdGender" Type="Int32" />
+          <Property Name="IdGender" Type="Int32" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="125" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="IdDeleted" Type="Int32" />
           <NavigationProperty Name="Gender" Relationship="Self.FK__Client__IdGender__38996AB5" FromRole="Client" ToRole="Gender" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__Order__IdClient__4E88ABD4" FromRole="Client" ToRole="Order" />
+          <NavigationProperty Name="OrderComponent" Relationship="Self.FK__Order__IdClient__4E88ABD4" FromRole="Client" ToRole="OrderComponent" />
+          <NavigationProperty Name="OrderService" Relationship="Self.FK__OrdersSer__IdCli__29AC2CE0" FromRole="Client" ToRole="OrderService" />
+          <NavigationProperty Name="Deleted" Relationship="Self.FK_Client_IdDeleted" FromRole="Client" ToRole="Deleted" />
         </EntityType>
         <EntityType Name="Component">
           <Key>
@@ -317,7 +570,24 @@
           <Property Name="IdComponent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ComponentName" Type="String" MaxLength="155" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__Order__IdCompone__4F7CD00D" FromRole="Component" ToRole="Order" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdDeleted" Type="Int32" />
+          <NavigationProperty Name="OrderComponent" Relationship="Self.FK__Order__IdCompone__4F7CD00D" FromRole="Component" ToRole="OrderComponent" />
+          <NavigationProperty Name="SellingComponent" Relationship="Self.FK__SellingCo__IdCom__58D1301D" FromRole="Component" ToRole="SellingComponent" />
+          <NavigationProperty Name="Deleted" Relationship="Self.FK_Component_IdDeleted" FromRole="Component" ToRole="Deleted" />
+        </EntityType>
+        <EntityType Name="Deleted">
+          <Key>
+            <PropertyRef Name="IdDeleted" />
+          </Key>
+          <Property Name="IdDeleted" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeletedName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_IdDeleted" FromRole="Deleted" ToRole="Client" />
+          <NavigationProperty Name="Component" Relationship="Self.FK_Component_IdDeleted" FromRole="Deleted" ToRole="Component" />
+          <NavigationProperty Name="OrderService" Relationship="Self.FK__OrdersSer__IdDel__2D7CBDC4" FromRole="Deleted" ToRole="OrderService" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_IdDeleted" FromRole="Deleted" ToRole="Employee" />
+          <NavigationProperty Name="OrderComponent" Relationship="Self.FK_Order_IdDeleted" FromRole="Deleted" ToRole="OrderComponent" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_Service_IdDeleted" FromRole="Deleted" ToRole="Service" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -328,16 +598,16 @@
           <Property Name="FirstName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FatherName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
           <Property Name="IdGender" Type="Int32" Nullable="false" />
-          <Property Name="DateOfBith" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DateOfEmployment" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DateOfDismissal" Type="DateTime" Precision="0" />
-          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="125" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdPost" Type="Int32" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="IdDeleted" Type="Int32" />
+          <NavigationProperty Name="Deleted" Relationship="Self.FK_Employee_IdDeleted" FromRole="Employee" ToRole="Deleted" />
           <NavigationProperty Name="Gender" Relationship="Self.FK__Employee__IdGend__4222D4EF" FromRole="Employee" ToRole="Gender" />
           <NavigationProperty Name="Post" Relationship="Self.FK__Employee__IdPost__4316F928" FromRole="Employee" ToRole="Post" />
+          <NavigationProperty Name="OrderService" Relationship="Self.FK__OrdersSer__IdEmp__2B947552" FromRole="Employee" ToRole="OrderService" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -348,23 +618,58 @@
           <NavigationProperty Name="Client" Relationship="Self.FK__Client__IdGender__38996AB5" FromRole="Gender" ToRole="Client" />
           <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__IdGend__4222D4EF" FromRole="Gender" ToRole="Employee" />
         </EntityType>
-        <EntityType Name="Order">
+        <EntityType Name="OrderComponent">
           <Key>
-            <PropertyRef Name="IdOrder" />
+            <PropertyRef Name="IdOrderComponent" />
           </Key>
-          <Property Name="IdOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdClient" Type="Int32" />
-          <Property Name="IdComponent" Type="Int32" />
-          <Property Name="IdService" Type="Int32" />
-          <Property Name="IdPayment" Type="Int32" />
-          <Property Name="IdSupplier" Type="Int32" />
+          <Property Name="IdOrderComponent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdComponent" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="IdPayment" Type="Int32" Nullable="false" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <Property Name="IdOrderStatus" Type="Int32" Nullable="false" />
+          <Property Name="IdSupplierType" Type="Int32" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateOfSupply" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Client" Relationship="Self.FK__Order__IdClient__4E88ABD4" FromRole="Order" ToRole="Client" />
-          <NavigationProperty Name="Component" Relationship="Self.FK__Order__IdCompone__4F7CD00D" FromRole="Order" ToRole="Component" />
-          <NavigationProperty Name="Payment" Relationship="Self.FK__Order__IdPayment__5165187F" FromRole="Order" ToRole="Payment" />
-          <NavigationProperty Name="Service" Relationship="Self.FK__Order__IdService__5070F446" FromRole="Order" ToRole="Service" />
-          <NavigationProperty Name="Supplier" Relationship="Self.FK__Order__IdSupplie__52593CB8" FromRole="Order" ToRole="Supplier" />
+          <Property Name="PerformanceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Commentary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdDeleted" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Order__IdClient__4E88ABD4" FromRole="OrderComponent" ToRole="Client" />
+          <NavigationProperty Name="Component" Relationship="Self.FK__Order__IdCompone__4F7CD00D" FromRole="OrderComponent" ToRole="Component" />
+          <NavigationProperty Name="Deleted" Relationship="Self.FK_Order_IdDeleted" FromRole="OrderComponent" ToRole="Deleted" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK__Order__IdPayment__5165187F" FromRole="OrderComponent" ToRole="Payment" />
+          <NavigationProperty Name="OrderStatus" Relationship="Self.FK_Order_OrderStatus" FromRole="OrderComponent" ToRole="OrderStatus" />
+          <NavigationProperty Name="SupplierType" Relationship="Self.FK_Order_SupplierType" FromRole="OrderComponent" ToRole="SupplierType" />
+        </EntityType>
+        <EntityType Name="OrderService">
+          <Key>
+            <PropertyRef Name="IdOrderService" />
+          </Key>
+          <Property Name="IdOrderService" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdService" Type="Int32" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdPayment" Type="Int32" Nullable="false" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <Property Name="IdOrderStatus" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PerformanceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Commentary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdDeleted" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__OrdersSer__IdCli__29AC2CE0" FromRole="OrderService" ToRole="Client" />
+          <NavigationProperty Name="Deleted" Relationship="Self.FK__OrdersSer__IdDel__2D7CBDC4" FromRole="OrderService" ToRole="Deleted" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__OrdersSer__IdEmp__2B947552" FromRole="OrderService" ToRole="Employee" />
+          <NavigationProperty Name="OrderStatus" Relationship="Self.FK__OrdersSer__IdOrd__2C88998B" FromRole="OrderService" ToRole="OrderStatus" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK__OrdersSer__IdPay__2AA05119" FromRole="OrderService" ToRole="Payment" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__OrdersSer__IdSer__28B808A7" FromRole="OrderService" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="IdOrderStatus" />
+          </Key>
+          <Property Name="IdOrderStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderStatusName" Type="String" MaxLength="55" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="OrderComponent" Relationship="Self.FK_Order_OrderStatus" FromRole="OrderStatus" ToRole="OrderComponent" />
+          <NavigationProperty Name="OrderService" Relationship="Self.FK__OrdersSer__IdOrd__2C88998B" FromRole="OrderStatus" ToRole="OrderService" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -372,7 +677,8 @@
           </Key>
           <Property Name="IdPayment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PaymentName" Type="String" MaxLength="95" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__Order__IdPayment__5165187F" FromRole="Payment" ToRole="Order" />
+          <NavigationProperty Name="OrderComponent" Relationship="Self.FK__Order__IdPayment__5165187F" FromRole="Payment" ToRole="OrderComponent" />
+          <NavigationProperty Name="OrderService" Relationship="Self.FK__OrdersSer__IdPay__2AA05119" FromRole="Payment" ToRole="OrderService" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
@@ -382,7 +688,27 @@
           <Property Name="PostName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Wage" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__IdPost__4316F928" FromRole="Post" ToRole="Employee" />
-          <NavigationProperty Name="User" Relationship="Self.FK__User__IdPost__3F466844" FromRole="Post" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Post" FromRole="Post" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SellingComponent">
+          <Key>
+            <PropertyRef Name="IdSellingComponent" />
+          </Key>
+          <Property Name="IdSellingComponent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdComponent" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="SalesValue" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Component" Relationship="Self.FK__SellingCo__IdCom__58D1301D" FromRole="SellingComponent" ToRole="Component" />
+        </EntityType>
+        <EntityType Name="SellingService">
+          <Key>
+            <PropertyRef Name="IdSellingService" />
+          </Key>
+          <Property Name="IdSellingService" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdService" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="SalesValue" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__SellingSe__IdSer__5BAD9CC8" FromRole="SellingService" ToRole="Service" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -391,20 +717,11 @@
           <Property Name="IdService" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ServiceName" Type="String" MaxLength="145" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__Order__IdService__5070F446" FromRole="Service" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="Supplier">
-          <Key>
-            <PropertyRef Name="IdSupplier" />
-          </Key>
-          <Property Name="IdSupplier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SupplierName" Type="String" MaxLength="65" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="IdSupplierType" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__Order__IdSupplie__52593CB8" FromRole="Supplier" ToRole="Order" />
-          <NavigationProperty Name="Supplier1" Relationship="Self.FK__Supplier__IdSupp__47DBAE45" FromRole="Supplier" ToRole="Supplier1" />
-          <NavigationProperty Name="Supplier2" Relationship="Self.FK__Supplier__IdSupp__47DBAE45" FromRole="Supplier1" ToRole="Supplier" />
+          <Property Name="IdDeleted" Type="Int32" />
+          <NavigationProperty Name="Deleted" Relationship="Self.FK_Service_IdDeleted" FromRole="Service" ToRole="Deleted" />
+          <NavigationProperty Name="OrderService" Relationship="Self.FK__OrdersSer__IdSer__28B808A7" FromRole="Service" ToRole="OrderService" />
+          <NavigationProperty Name="SellingService" Relationship="Self.FK__SellingSe__IdSer__5BAD9CC8" FromRole="Service" ToRole="SellingService" />
         </EntityType>
         <EntityType Name="SupplierType">
           <Key>
@@ -412,6 +729,18 @@
           </Key>
           <Property Name="IdSupplierType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SupplierTypeName" Type="String" MaxLength="65" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <NavigationProperty Name="OrderComponent" Relationship="Self.FK_Order_SupplierType" FromRole="SupplierType" ToRole="OrderComponent" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -421,10 +750,10 @@
           <Property Name="IdPost" Type="Int32" />
           <Property Name="Login" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Post" Relationship="Self.FK__User__IdPost__3F466844" FromRole="User" ToRole="Post" />
+          <NavigationProperty Name="Post" Relationship="Self.FK_User_Post" FromRole="User" ToRole="Post" />
         </EntityType>
         <Association Name="FK__Client__IdGender__38996AB5">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -436,26 +765,122 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__IdClient__4E88ABD4">
-          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
               <PropertyRef Name="IdClient" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderComponent">
               <PropertyRef Name="IdClient" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__OrdersSer__IdCli__29AC2CE0">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_IdDeleted">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Order__IdCompone__4F7CD00D">
-          <End Role="Component" Type="Self.Component" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Component" Type="Self.Component" Multiplicity="1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Component">
               <PropertyRef Name="IdComponent" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderComponent">
               <PropertyRef Name="IdComponent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SellingCo__IdCom__58D1301D">
+          <End Role="Component" Type="Self.Component" Multiplicity="1" />
+          <End Role="SellingComponent" Type="Self.SellingComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="IdComponent" />
+            </Principal>
+            <Dependent Role="SellingComponent">
+              <PropertyRef Name="IdComponent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Component_IdDeleted">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="0..1" />
+          <End Role="Component" Type="Self.Component" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="Component">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersSer__IdDel__2D7CBDC4">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_IdDeleted">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_IdDeleted">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="0..1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="OrderComponent">
+              <PropertyRef Name="IdDeleted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_IdDeleted">
+          <End Role="Deleted" Type="Self.Deleted" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deleted">
+              <PropertyRef Name="IdDeleted" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="IdDeleted" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -483,43 +908,91 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__OrdersSer__IdEmp__2B947552">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="IdEmployee" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Order__IdPayment__5165187F">
-          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Payment">
               <PropertyRef Name="IdPayment" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderComponent">
               <PropertyRef Name="IdPayment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__IdService__5070F446">
-          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+        <Association Name="FK_Order_OrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="IdOrderStatus" />
+            </Principal>
+            <Dependent Role="OrderComponent">
+              <PropertyRef Name="IdOrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_SupplierType">
+          <End Role="SupplierType" Type="Self.SupplierType" Multiplicity="1" />
+          <End Role="OrderComponent" Type="Self.OrderComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierType">
+              <PropertyRef Name="IdSupplierType" />
+            </Principal>
+            <Dependent Role="OrderComponent">
+              <PropertyRef Name="IdSupplierType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersSer__IdOrd__2C88998B">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="IdOrderStatus" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IdOrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersSer__IdPay__2AA05119">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="IdPayment" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="IdPayment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersSer__IdSer__28B808A7">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">
               <PropertyRef Name="IdService" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderService">
               <PropertyRef Name="IdService" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__IdSupplie__52593CB8">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="IdSupplier" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="IdSupplier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__User__IdPost__3F466844">
+        <Association Name="FK_User_Post">
           <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -531,29 +1004,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Supplier__IdSupp__47DBAE45">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
-          <End Role="Supplier1" Type="Self.Supplier" Multiplicity="*" />
+        <Association Name="FK__SellingSe__IdSer__5BAD9CC8">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="SellingService" Type="Self.SellingService" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="IdSupplier" />
+            <Principal Role="Service">
+              <PropertyRef Name="IdService" />
             </Principal>
-            <Dependent Role="Supplier1">
-              <PropertyRef Name="IdSupplierType" />
+            <Dependent Role="SellingService">
+              <PropertyRef Name="IdService" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="Component" EntityType="Self.Component" />
+          <EntitySet Name="Deleted" EntityType="Self.Deleted" />
           <EntitySet Name="Employee" EntityType="Self.Employee" />
           <EntitySet Name="Gender" EntityType="Self.Gender" />
-          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderComponent" EntityType="Self.OrderComponent" />
+          <EntitySet Name="OrderService" EntityType="Self.OrderService" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
           <EntitySet Name="Payment" EntityType="Self.Payment" />
           <EntitySet Name="Post" EntityType="Self.Post" />
+          <EntitySet Name="SellingComponent" EntityType="Self.SellingComponent" />
+          <EntitySet Name="SellingService" EntityType="Self.SellingService" />
           <EntitySet Name="Service" EntityType="Self.Service" />
-          <EntitySet Name="Supplier" EntityType="Self.Supplier" />
           <EntitySet Name="SupplierType" EntityType="Self.SupplierType" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK__Client__IdGender__38996AB5" Association="Self.FK__Client__IdGender__38996AB5">
             <End Role="Gender" EntitySet="Gender" />
@@ -561,11 +1039,43 @@
           </AssociationSet>
           <AssociationSet Name="FK__Order__IdClient__4E88ABD4" Association="Self.FK__Order__IdClient__4E88ABD4">
             <End Role="Client" EntitySet="Client" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdCli__29AC2CE0" Association="Self.FK__OrdersSer__IdCli__29AC2CE0">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_IdDeleted" Association="Self.FK_Client_IdDeleted">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="Client" EntitySet="Client" />
           </AssociationSet>
           <AssociationSet Name="FK__Order__IdCompone__4F7CD00D" Association="Self.FK__Order__IdCompone__4F7CD00D">
             <End Role="Component" EntitySet="Component" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SellingCo__IdCom__58D1301D" Association="Self.FK__SellingCo__IdCom__58D1301D">
+            <End Role="Component" EntitySet="Component" />
+            <End Role="SellingComponent" EntitySet="SellingComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Component_IdDeleted" Association="Self.FK_Component_IdDeleted">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="Component" EntitySet="Component" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdDel__2D7CBDC4" Association="Self.FK__OrdersSer__IdDel__2D7CBDC4">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_IdDeleted" Association="Self.FK_Employee_IdDeleted">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_IdDeleted" Association="Self.FK_Order_IdDeleted">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_IdDeleted" Association="Self.FK_Service_IdDeleted">
+            <End Role="Deleted" EntitySet="Deleted" />
+            <End Role="Service" EntitySet="Service" />
           </AssociationSet>
           <AssociationSet Name="FK__Employee__IdGend__4222D4EF" Association="Self.FK__Employee__IdGend__4222D4EF">
             <End Role="Gender" EntitySet="Gender" />
@@ -575,25 +1085,41 @@
             <End Role="Post" EntitySet="Post" />
             <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdEmp__2B947552" Association="Self.FK__OrdersSer__IdEmp__2B947552">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
           <AssociationSet Name="FK__Order__IdPayment__5165187F" Association="Self.FK__Order__IdPayment__5165187F">
             <End Role="Payment" EntitySet="Payment" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__IdService__5070F446" Association="Self.FK__Order__IdService__5070F446">
+          <AssociationSet Name="FK_Order_OrderStatus" Association="Self.FK_Order_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_SupplierType" Association="Self.FK_Order_SupplierType">
+            <End Role="SupplierType" EntitySet="SupplierType" />
+            <End Role="OrderComponent" EntitySet="OrderComponent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdOrd__2C88998B" Association="Self.FK__OrdersSer__IdOrd__2C88998B">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdPay__2AA05119" Association="Self.FK__OrdersSer__IdPay__2AA05119">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersSer__IdSer__28B808A7" Association="Self.FK__OrdersSer__IdSer__28B808A7">
             <End Role="Service" EntitySet="Service" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderService" EntitySet="OrderService" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__IdSupplie__52593CB8" Association="Self.FK__Order__IdSupplie__52593CB8">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK__User__IdPost__3F466844" Association="Self.FK__User__IdPost__3F466844">
+          <AssociationSet Name="FK_User_Post" Association="Self.FK_User_Post">
             <End Role="Post" EntitySet="Post" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK__Supplier__IdSupp__47DBAE45" Association="Self.FK__Supplier__IdSupp__47DBAE45">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="Supplier1" EntitySet="Supplier" />
+          <AssociationSet Name="FK__SellingSe__IdSer__5BAD9CC8" Association="Self.FK__SellingSe__IdSer__5BAD9CC8">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="SellingService" EntitySet="SellingService" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -614,7 +1140,7 @@
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IdDeleted" ColumnName="IdDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -624,6 +1150,16 @@
                 <ScalarProperty Name="IdComponent" ColumnName="IdComponent" />
                 <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdDeleted" ColumnName="IdDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deleted">
+            <EntityTypeMapping TypeName="Model.Deleted">
+              <MappingFragment StoreEntitySet="Deleted">
+                <ScalarProperty Name="IdDeleted" ColumnName="IdDeleted" />
+                <ScalarProperty Name="DeletedName" ColumnName="DeletedName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -635,14 +1171,12 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="FatherName" ColumnName="FatherName" />
                 <ScalarProperty Name="IdGender" ColumnName="IdGender" />
-                <ScalarProperty Name="DateOfBith" ColumnName="DateOfBith" />
-                <ScalarProperty Name="DateOfEmployment" ColumnName="DateOfEmployment" />
-                <ScalarProperty Name="DateOfDismissal" ColumnName="DateOfDismissal" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="IdPost" ColumnName="IdPost" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IdDeleted" ColumnName="IdDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -654,17 +1188,45 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Order">
-            <EntityTypeMapping TypeName="Model.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+          <EntitySetMapping Name="OrderComponent">
+            <EntityTypeMapping TypeName="Model.OrderComponent">
+              <MappingFragment StoreEntitySet="OrderComponent">
+                <ScalarProperty Name="IdOrderComponent" ColumnName="IdOrderComponent" />
                 <ScalarProperty Name="IdClient" ColumnName="IdClient" />
                 <ScalarProperty Name="IdComponent" ColumnName="IdComponent" />
-                <ScalarProperty Name="IdService" ColumnName="IdService" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="IdPayment" ColumnName="IdPayment" />
-                <ScalarProperty Name="IdSupplier" ColumnName="IdSupplier" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="IdOrderStatus" ColumnName="IdOrderStatus" />
+                <ScalarProperty Name="IdSupplierType" ColumnName="IdSupplierType" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="DateOfSupply" ColumnName="DateOfSupply" />
+                <ScalarProperty Name="PerformanceDate" ColumnName="PerformanceDate" />
+                <ScalarProperty Name="Commentary" ColumnName="Commentary" />
+                <ScalarProperty Name="IdDeleted" ColumnName="IdDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderService">
+            <EntityTypeMapping TypeName="Model.OrderService">
+              <MappingFragment StoreEntitySet="OrderService">
+                <ScalarProperty Name="IdOrderService" ColumnName="IdOrderService" />
+                <ScalarProperty Name="IdService" ColumnName="IdService" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdPayment" ColumnName="IdPayment" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="IdOrderStatus" ColumnName="IdOrderStatus" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="PerformanceDate" ColumnName="PerformanceDate" />
+                <ScalarProperty Name="Commentary" ColumnName="Commentary" />
+                <ScalarProperty Name="IdDeleted" ColumnName="IdDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="Model.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="IdOrderStatus" ColumnName="IdOrderStatus" />
+                <ScalarProperty Name="OrderStatusName" ColumnName="OrderStatusName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -685,23 +1247,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SellingComponent">
+            <EntityTypeMapping TypeName="Model.SellingComponent">
+              <MappingFragment StoreEntitySet="SellingComponent">
+                <ScalarProperty Name="IdSellingComponent" ColumnName="IdSellingComponent" />
+                <ScalarProperty Name="IdComponent" ColumnName="IdComponent" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SalesValue" ColumnName="SalesValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SellingService">
+            <EntityTypeMapping TypeName="Model.SellingService">
+              <MappingFragment StoreEntitySet="SellingService">
+                <ScalarProperty Name="IdSellingService" ColumnName="IdSellingService" />
+                <ScalarProperty Name="IdService" ColumnName="IdService" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SalesValue" ColumnName="SalesValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Service">
             <EntityTypeMapping TypeName="Model.Service">
               <MappingFragment StoreEntitySet="Service">
                 <ScalarProperty Name="IdService" ColumnName="IdService" />
                 <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Supplier">
-            <EntityTypeMapping TypeName="Model.Supplier">
-              <MappingFragment StoreEntitySet="Supplier">
-                <ScalarProperty Name="IdSupplier" ColumnName="IdSupplier" />
-                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="IdSupplierType" ColumnName="IdSupplierType" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdDeleted" ColumnName="IdDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -710,6 +1283,18 @@
               <MappingFragment StoreEntitySet="SupplierType">
                 <ScalarProperty Name="IdSupplierType" ColumnName="IdSupplierType" />
                 <ScalarProperty Name="SupplierTypeName" ColumnName="SupplierTypeName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -17,13 +17,16 @@ namespace BuildersApp_Novikov_3ISP11_13.Helper
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Payment()
         {
-            this.Order = new HashSet<Order>();
+            this.OrderComponent = new HashSet<OrderComponent>();
+            this.OrderService = new HashSet<OrderService>();
         }
     
         public int IdPayment { get; set; }
         public string PaymentName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<OrderComponent> OrderComponent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderService> OrderService { get; set; }
     }
 }

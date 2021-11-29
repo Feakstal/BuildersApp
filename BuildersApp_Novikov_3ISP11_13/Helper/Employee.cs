@@ -14,21 +14,28 @@ namespace BuildersApp_Novikov_3ISP11_13.Helper
     
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.OrderService = new HashSet<OrderService>();
+        }
+    
         public int IdEmployee { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string FatherName { get; set; }
         public int IdGender { get; set; }
-        public System.DateTime DateOfBith { get; set; }
-        public System.DateTime DateOfEmployment { get; set; }
-        public Nullable<System.DateTime> DateOfDismissal { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
         public int IdPost { get; set; }
-        public bool IsDeleted { get; set; }
+        public Nullable<int> IdDeleted { get; set; }
     
+        public virtual Deleted Deleted { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual Post Post { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderService> OrderService { get; set; }
     }
 }

@@ -5,30 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BuildersApp_Novikov_3ISP11_13.Views"
         mc:Ignorable="d"
-        Title="Главное окно" x:Name="MainWin" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent">
-    <Border CornerRadius="10" Background="#FFCCBB">
+        Title="Главное окно" x:Name="winMain" Height="600" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Icon="/Resources/MainLogo.png">
+    <Border CornerRadius="10 10 0 0" Background="White">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="7*"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Background="#444C5C" CornerRadius="10 10 0 0" MouseDown="Drag"/>
+            <Border Grid.Row="0" Background="#FF248ECB" CornerRadius="10 10 0 0" MouseDown="Drag"/>
+            <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0">
+                <Image Source="/Resources/BorderLogo.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Ремонто-строительная организация 'Сантехника'" FontSize="20" Margin="10 0 0 0" Foreground="White"/>
+            </WrapPanel>
             <WrapPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10">
-                <Button x:Name="btnMinWindow" Content="_" Style="{StaticResource btnDefault}" Height="20" Width="20" Margin="0 0 5 0" Click="btnMinWindow_Click"/>
-                <Button x:Name="btnMaxWindow" Content="2" Height="20" Style="{StaticResource btnDefault}" Width="20" Margin="0 0 5 0" Click="btnMaxWindow_Click" FontFamily="Webdings"/>
-                <Button x:Name="btnClose" Content="X" Style="{StaticResource btnDefault}" Height="20" Width="20" Click="btnClose_Click"/>
+                <Button x:Name="btnMinWindow" Content="_" Style="{StaticResource btnUpperBar}" Margin="0 0 5 0" Click="btnMinWindow_Click"/>
+                <Button x:Name="btnMaxWindow" Content="2" Style="{StaticResource btnUpperBar}" Margin="0 0 5 0" Click="btnMaxWindow_Click" FontFamily="Webdings"/>
+                <Button x:Name="btnClose" Content="X" Style="{StaticResource btnUpperBar}" Click="btnClose_Click"/>
             </WrapPanel>
-            <WrapPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
-                <TextBlock x:Name="tblockTitle" FontSize="20" FontFamily="Franklin Gothic Book" Foreground="Black" FontWeight="Bold"/>
-            </WrapPanel>
-            <WrapPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
-                <Button Style="{StaticResource btnDefault}" Margin="10 0 0 0"/>
-                <Button Style="{StaticResource btnDefault}" Margin="10 0 0 0"/>
-                <Button Style="{StaticResource btnDefault}" Margin="10 0 0 0"/>
-                <Button Style="{StaticResource btnDefault}" Margin="10 0 0 0"/>
-            </WrapPanel>
-            <Frame x:Name="frmMain" Grid.Row="2"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <WrapPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+                    <TextBlock x:Name="tblockTitle" FontSize="20" FontFamily="Franklin Gothic Book" Foreground="White" FontWeight="Bold"/>
+                </WrapPanel>
+                <Grid Background="#FF248ECB">
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                        <Button x:Name="btnServices" Style="{StaticResource btnMainMenuWindow}" Content="Услуги" Click="btnServices_Click"/>
+                        <Button x:Name="btnComponents" Style="{StaticResource btnMainMenuWindow}" Content="Товары" Margin="0 10 0 0" Click="btnComponents_Click"/>
+                        <Button x:Name="btnOrdersComponent" Style="{StaticResource btnMainMenuWindow}" Content="Заказы товаров" Margin="0 10 0 0" Click="btnOrdersComponent_Click"/>
+                        <Button x:Name="btnOrdersService" Style="{StaticResource btnMainMenuWindow}" Content="Заказы услуг" Margin="0 10 0 0" Click="btnOrdersService_Click"/>
+                        <Button x:Name="btnEmployees" Style="{StaticResource btnMainMenuWindow}" Content="Сотрудники" Margin="0 10 0 0" Click="btnEmployees_Click"/>
+                        <Button x:Name="btnClients" Style="{StaticResource btnMainMenuWindow}" Content="Клиенты" Margin="0 10 0 0" Click="btnClients_Click"/>
+                        <Button x:Name="btnSC" Style="{StaticResource btnMainMenuWindow}" Content="Продажи товаров" Click="btnOpenSC_Click" Margin="0 10 0 0"/>
+                        <Button x:Name="btnSS" Style="{StaticResource btnMainMenuWindow}" Content="Продажи услуг" Click="btnOpenSS_Click" Margin="0 10 0 0"/>
+                        <Button x:Name="btnExitProfile" Style="{StaticResource btnMainMenuWindow}" Content="Выйти из профиля" Margin="0 10 0 0" Click="btnExitProfile_Click"/>
+                    </StackPanel>
+                </Grid>
+                <Frame x:Name="frmMain" Grid.Row="2" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+            </Grid>
         </Grid>
     </Border>
 </Window>

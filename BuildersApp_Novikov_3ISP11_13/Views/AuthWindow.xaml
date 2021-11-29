@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BuildersApp_Novikov_3ISP11_13"
         mc:Ignorable="d"
-        Title="Авторизация" x:Name="AuthWin" Height="250" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent">
-    <Border CornerRadius="10" Background="#FFCCBB">
+        Title="Авторизация" x:Name="AuthWin" Height="280" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Icon="/Resources/MainLogo.png">
+    <Border CornerRadius="10 10 0 0" Background="White">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="150"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Background="#444C5C" CornerRadius="10 10 0 0" MouseDown="Drag"/>
+            <Border Grid.Row="0" Background="#FF248ECB" CornerRadius="10 10 0 0" MouseDown="Drag"/>
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 20 0 0">
-                <TextBlock Text="Авторизация" Foreground="Black" FontFamily="Franklin Gothic Book" FontWeight="Bold" FontSize="18"/>
+                <TextBlock Text="Авторизация" Foreground="#FF248ECB" FontFamily="Franklin Gothic Book" FontWeight="Bold" FontSize="18"/>
             </StackPanel>
             <TextBox Grid.Row="1" x:Name="tboxLogin" Style="{StaticResource tboxDefault}"/>
-            <TextBlock Grid.Row="1" IsHitTestVisible="False" Text="Эл. почта или логин" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Franklin Gothic Book">
+            <TextBlock Grid.Row="1" IsHitTestVisible="False" Text="Эл. почта или логин" FontSize="14" Foreground="#FF248ECB" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Franklin Gothic Book">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -32,7 +32,7 @@
                 </TextBlock.Style>
             </TextBlock>
             <TextBox x:Name="tboxPassword" Grid.Row="1" Margin="0 80 0 0" FontFamily="HoloLens MDL2 Assets" Style="{StaticResource tboxDefault}"/>
-            <TextBlock Grid.Row="1" IsHitTestVisible="False" Text="Пароль" Margin="0 80 0 0" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Franklin Gothic Book">
+            <TextBlock Grid.Row="1" IsHitTestVisible="False" Text="Пароль" Margin="0 80 0 0" FontSize="14" Foreground="#FF248ECB" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Franklin Gothic Book">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -45,9 +45,13 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Button x:Name="BtnCancel" Margin="5 5 0 0" Content="Отмена" Click="BtnCancel_Click" Style="{StaticResource btnDefault}" Height="25" Width="80"/>
-                <Button x:Name="BtnEnter" Margin="10 5 0 0" Content="Войти" Click="BtnEnter_Click" Style="{StaticResource btnDefault}" Height="25" Width="80"/>
+            <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <WrapPanel>
+                    <Button x:Name="BtnCancel" Margin="5 5 0 0" Content="Отмена" Click="BtnCancel_Click" Style="{StaticResource btnDefault}" Height="25" Width="80"/>
+                    <Button x:Name="BtnEnter" Margin="10 5 0 0" Content="Войти" Click="BtnEnter_Click" Style="{StaticResource btnDefault}" Height="25" Width="80"/>
+                </WrapPanel>
+                <Image Source="/Resources/MainLogo.png" Width="30" Height="30" Margin="0 15 0 0"/>
+                <TextBlock Text="Сантехника" Style="{StaticResource tblockMain}" HorizontalAlignment="Center"/>
             </StackPanel>
         </Grid>
     </Border>

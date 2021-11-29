@@ -4,28 +4,45 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ce0eb5b755c9470dacbc423b63e882be" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Client" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Component" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Gender" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Payment" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Post" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Service" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Supplier" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SupplierType" Width="1.5" PointX="5.75" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3" PointY="21.375" IsExpanded="true" />
+      <Diagram DiagramId="0af5decdf7b54994a0e8e36c3dd6e08b" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Client" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Component" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Deleted" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="6" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Gender" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OrderComponent" Width="1.5" PointX="8.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OrderService" Width="1.5" PointX="8.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OrderStatus" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Payment" Width="1.5" PointX="6" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Post" Width="1.5" PointX="3.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SellingComponent" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SellingService" Width="1.5" PointX="5.25" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Service" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SupplierType" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Model.FK__Client__IdGender__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__Order__IdClient__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__OrdersSer__IdCli__29AC2CE0" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Client_IdDeleted" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__Order__IdCompone__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__SellingCo__IdCom__58D1301D" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Component_IdDeleted" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__OrdersSer__IdDel__2D7CBDC4" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Employee_IdDeleted" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Order_IdDeleted" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Service_IdDeleted" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__Employee__IdGend__4222D4EF" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__Employee__IdPost__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__OrdersSer__IdEmp__2B947552" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__Order__IdPayment__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__Order__IdService__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__Order__IdSupplie__52593CB8" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__User__IdPost__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__Supplier__IdSupp__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Order_OrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Order_SupplierType" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__OrdersSer__IdOrd__2C88998B" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__OrdersSer__IdPay__2AA05119" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__OrdersSer__IdSer__28B808A7" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_User_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__SellingSe__IdSer__5BAD9CC8" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

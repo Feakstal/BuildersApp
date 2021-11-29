@@ -1,18 +1,7 @@
 ﻿using BuildersApp_Novikov_3ISP11_13.Helper;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BuildersApp_Novikov_3ISP11_13.Views
 {
@@ -24,6 +13,7 @@ namespace BuildersApp_Novikov_3ISP11_13.Views
 
         Entities Entities = new Entities();
         public static User authUser;
+        public static string Role;
         public AuthWindow()
         {
             InitializeComponent();
@@ -37,23 +27,26 @@ namespace BuildersApp_Novikov_3ISP11_13.Views
 
         private void BtnEnter_Click(object sender, RoutedEventArgs e)
         {
-            authUser = Entities.User.FirstOrDefault(i => i.Login == tboxLogin.Text && i.Password.Equals(tboxPassword.Text));
+            authUser = Entities.User.FirstOrDefault(i => i.Login == tboxLogin.Text && i.Password == tboxPassword.Text);
+            Role = authUser.Post.PostName;
+
             if(authUser != null)
             {
-                if (authUser.Password == tboxPassword.Text)
-                {
-                    MainMenuWindow mainMenuWindow = new MainMenuWindow();
-                    mainMenuWindow.Show();
-                    Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Неверный пароль, повторите попытку", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }    
+                MessageBox.Show($"Вы авторизовались от лица '{Role}'", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                MainMenuWindow mainMenuWindow = new MainMenuWindow();
+                mainMenuWindow.Show();
+                Hide();
             }
             else
             {
-                MessageBox.Show("Пользователь не найден, повторите попытку", "Пользователь не найден", MessageBoxButton.OK, MessageBoxImage.Error);
+                if(tboxPassword.Text.Length == 0 && tboxLogin.Text.Length != 0)
+                    MessageBox.Show("Вы не ввели пароль.", "Авторизация", MessageBoxButton.OK, MessageBoxImage.Error);
+                else if(tboxPassword.Text.Length == 0 && tboxLogin.Text.Length == 0)
+                    MessageBox.Show("Вы не заполнили данные для авторизации.", "Авторизация", MessageBoxButton.OK, MessageBoxImage.Error);
+                else if(tboxLogin.Text.Length != 0 && tboxPassword.Text.Length != 0)
+                    MessageBox.Show("В доступе отказано. Проверьте правильность введенных данных.", "Авторизация", MessageBoxButton.OK, MessageBoxImage.Error);
+                else if(tboxLogin.Text.Length == 0 && tboxPassword.Text.Length != 0)
+                    MessageBox.Show("Вы не ввели логин.", "Авторизация", MessageBoxButton.OK, MessageBoxImage.Error);
             } 
         }
         private void Drag(object sender, MouseButtonEventArgs e)

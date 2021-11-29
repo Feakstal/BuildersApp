@@ -12,31 +12,33 @@ namespace BuildersApp_Novikov_3ISP11_13.Helper
     using System;
     using System.Collections.Generic;
     
-    public partial class Client
+    public partial class Deleted
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Client()
+        public Deleted()
         {
-            this.OrderComponent = new HashSet<OrderComponent>();
+            this.Client = new HashSet<Client>();
+            this.Component = new HashSet<Component>();
             this.OrderService = new HashSet<OrderService>();
+            this.Employee = new HashSet<Employee>();
+            this.OrderComponent = new HashSet<OrderComponent>();
+            this.Service = new HashSet<Service>();
         }
     
-        public int IdClient { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string FatherName { get; set; }
-        public int IdGender { get; set; }
-        public System.DateTime DateOfBirth { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Address { get; set; }
-        public Nullable<int> IdDeleted { get; set; }
+        public int IdDeleted { get; set; }
+        public string DeletedName { get; set; }
     
-        public virtual Gender Gender { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Client> Client { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Component> Component { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderService> OrderService { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderComponent> OrderComponent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderService> OrderService { get; set; }
-        public virtual Deleted Deleted { get; set; }
+        public virtual ICollection<Service> Service { get; set; }
     }
 }

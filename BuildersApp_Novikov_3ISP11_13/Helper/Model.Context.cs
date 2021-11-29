@@ -27,14 +27,19 @@ namespace BuildersApp_Novikov_3ISP11_13.Helper
     
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Component> Component { get; set; }
+        public virtual DbSet<Deleted> Deleted { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
-        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderComponent> OrderComponent { get; set; }
+        public virtual DbSet<OrderService> OrderService { get; set; }
+        public virtual DbSet<OrderStatus> OrderStatus { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
         public virtual DbSet<Post> Post { get; set; }
+        public virtual DbSet<SellingComponent> SellingComponent { get; set; }
+        public virtual DbSet<SellingService> SellingService { get; set; }
         public virtual DbSet<Service> Service { get; set; }
-        public virtual DbSet<Supplier> Supplier { get; set; }
         public virtual DbSet<SupplierType> SupplierType { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
     }
 }

@@ -17,14 +17,20 @@ namespace BuildersApp_Novikov_3ISP11_13.Helper
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Service()
         {
-            this.Order = new HashSet<Order>();
+            this.OrderService = new HashSet<OrderService>();
+            this.SellingService = new HashSet<SellingService>();
         }
     
         public int IdService { get; set; }
         public string ServiceName { get; set; }
         public decimal Price { get; set; }
+        public string Description { get; set; }
+        public Nullable<int> IdDeleted { get; set; }
     
+        public virtual Deleted Deleted { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<OrderService> OrderService { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SellingService> SellingService { get; set; }
     }
 }

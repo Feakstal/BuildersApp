@@ -12,19 +12,13 @@ namespace BuildersApp_Novikov_3ISP11_13.Helper
     using System;
     using System.Collections.Generic;
     
-    public partial class SupplierType
+    public partial class SellingComponent
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SupplierType()
-        {
-            this.OrderComponent = new HashSet<OrderComponent>();
-        }
+        public int IdSellingComponent { get; set; }
+        public int IdComponent { get; set; }
+        public int Quantity { get; set; }
+        public decimal SalesValue { get; set; }
     
-        public int IdSupplierType { get; set; }
-        public string SupplierTypeName { get; set; }
-        public decimal Price { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderComponent> OrderComponent { get; set; }
+        public virtual Component Component { get; set; }
     }
 }
